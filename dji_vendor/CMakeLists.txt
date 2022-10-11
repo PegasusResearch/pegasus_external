@@ -19,8 +19,10 @@ endif()
 # find dependencies
 find_package(ament_cmake REQUIRED)
 
+# Set the place where the dji sdk will be installed
 set(dji_DESTDIR ${CMAKE_CURRENT_BINARY_DIR}/dji_install)
 
+# Clone the dji-sdk repository, check it to a specific version and build it
 include(ExternalProject)
 ExternalProject_Add(dji
   GIT_REPOSITORY https://github.com/dji-sdk/Onboard-SDK.git
@@ -31,15 +33,29 @@ ExternalProject_Add(dji
   CONFIGURE_COMMAND ${CMAKE_COMMAND} -DCMAKE_INSTALL_PREFIX=<INSTALL_DIR> -DADVANCED_SENSING=ON
 )
 
-#ament_export_include_directories(include)
-#ament_export_libraries(${SHORT_LIBS})
+# Discover the generated static libraries
+file(GLOB STATIC_LIBS
+  "${dji_DESTDIR}/lib/*.a"
+)
 
-#install(DIRECTORY ${dji_DESTDIR}/include/
-#  DESTINATION include
-#)
+set(SHORT_LIBS "")
 
-#install(DIRECTORY ${dji_DESTDIR}/lib/
-#  DESTINATION lib
-#)
+foreach(STATIC_LIB ${STATIC_LIBS})
+  string(REPLACE ${dji_DESTDIR}/lib/ "" SHORT_LIB ${STATIC_LIB})
+  list(APPEND SHORT_LIBS ${SHORT_LIB})
+endforeach()
+
+# Export the generated static libaries and include files so that it can
+# be used by other packages
+ament_export_include_directories(include)
+ament_export_libraries(${SHORT_LIBS})
+
+install(DIRECTORY ${dji_DESTDIR}/include/
+  DESTINATION include
+)
+
+install(DIRECTORY ${dji_DESTDIR}/lib/
+  DESTINATION lib
+)
 
 ament_package()
