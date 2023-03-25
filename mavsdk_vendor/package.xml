@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>mavsdk_vendor</name>
+  <version>1.4.13</version>
+  <description>Wrapper around MavSDK to make it available to the ROS ecosystem.</description>
+  <maintainer email="marcelo.jacinto@tecnico.ulisboa.pt">Marcelo Jacinto</maintainer>
+  <license>BSD 3-Clause</license>
+
+  <url type="bugtracker">https://github.com/mavlink/MAVSDK/issues</url>
+  <url type="repository">https://github.com/mavlink/MAVSDK</url>
+  <url type="website">https://mavsdk.mavlink.io/main/en/index.html</url>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>

@@ -1,9 +1,9 @@
 cmake_minimum_required(VERSION 3.5)
-project(casadi_vendor)
+project(mavsdk_vendor)
 
-# Default to C99
+# Default to C17
 if(NOT CMAKE_C_STANDARD)
-  set(CMAKE_C_STANDARD 99)
+  set(CMAKE_C_STANDARD 17)
 endif()
 
 # Default to C++20
@@ -18,37 +18,37 @@ endif()
 # find dependencies
 find_package(ament_cmake REQUIRED)
 
-set(casadi_DESTDIR ${CMAKE_CURRENT_BINARY_DIR}/casadi_install)
+set(mavsdk_DESTDIR ${CMAKE_CURRENT_BINARY_DIR}/mavsdk_install)
 
 include(ExternalProject)
-ExternalProject_Add(casadi
-  GIT_REPOSITORY https://github.com/casadi/casadi
-  GIT_TAG 3.5.5
+ExternalProject_Add(mavsdk
+  GIT_REPOSITORY https://github.com/mavlink/MAVSDK
+  GIT_TAG v1.4.13
   GIT_SHALLOW TRUE
   BUILD_IN_SOURCE TRUE
-  INSTALL_DIR ${casadi_DESTDIR}
-  CONFIGURE_COMMAND ${CMAKE_COMMAND} -DCMAKE_INSTALL_PREFIX=<INSTALL_DIR> -DWITH_COMMON=ON -DWITH_IPOPT=OFF -DWITH_THREAD=ON -DCMAKE_POSITION_INDEPENDENT_CODE=ON
+  INSTALL_DIR ${mavsdk_DESTDIR}
+  CONFIGURE_COMMAND ${CMAKE_COMMAND} -DCMAKE_INSTALL_PREFIX=<INSTALL_DIR> -DCMAKE_POSITION_INDEPENDENT_CODE=ON
 )
 
 file(GLOB SHARED_LIBS
-  "${casadi_DESTDIR}/lib/*.so"
+  "${mavsdk_DESTDIR}/lib/*.so"
 )
 
 set(SHORT_LIBS "")
 
 foreach(SHARED_LIB ${SHARED_LIBS})
-  string(REPLACE ${casadi_DESTDIR}/lib/ "" SHORT_LIB ${SHARED_LIB})
+  string(REPLACE ${mavsdk_DESTDIR}/lib/ "" SHORT_LIB ${SHARED_LIB})
   list(APPEND SHORT_LIBS ${SHORT_LIB})
 endforeach()
 
 ament_export_include_directories(include)
 ament_export_libraries(${SHORT_LIBS})
 
-install(DIRECTORY ${casadi_DESTDIR}/include/
+install(DIRECTORY ${mavsdk_DESTDIR}/include/
   DESTINATION include
 )
 
-install(DIRECTORY ${casadi_DESTDIR}/lib/
+install(DIRECTORY ${mavsdk_DESTDIR}/lib/
   DESTINATION lib
 )
 
