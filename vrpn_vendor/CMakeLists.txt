@@ -47,6 +47,7 @@ foreach(SHARED_LIB ${SHARED_LIBS})
 endforeach()
 
 ament_export_include_directories(include)
+# We need to export libquat twice, because of a circular dependency in the vrpn library
 ament_export_libraries(libquat.a libvrpn.a libquat.a)
 
 install(
@@ -58,17 +59,5 @@ install(
     DIRECTORY ${vrpn_DESTDIR}/usr/local/lib/
     DESTINATION lib
 )
-
-# Create the VRPN libraries manually
-# add_library(libvrpn)
-# set_target_properties(libvrpn PROPERTIES IMPORTED_LOCATION ${vrpn_DESTDIR}/usr/local/lib/libvrpn.a)
-# set_target_properties(libvrpn PROPERTIES INTERFACE_INCLUDE_DIRECTORIES ${vrpn_DESTDIR}/usr/local/include)
-
-# add_library(libquat)
-# set_target_properties(libquat PROPERTIES IMPORTED_LOCATION ${vrpn_DESTDIR}/usr/local/lib/libquat.a)
-# set_target_properties(libquat PROPERTIES INTERFACE_INCLUDE_DIRECTORIES ${vrpn_DESTDIR}/usr/local/include)
-
-# ament_export_libraries(libvrpn PROPERTIES IMPORTED_LOCATION ${vrpn_DESTDIR}/usr/local/lib/libvrpn.a)
-# ament_export_libraries(libquat PROPERTIES IMPORTED_LOCATION ${vrpn_DESTDIR}/usr/local/lib/libquat.a)
 
 ament_package()
