@@ -44,6 +44,11 @@ endforeach()
 ament_export_include_directories(include)
 ament_export_libraries(${SHORT_LIBS})
 
+# Move the cmake configurations such that mavsdk can be found automatically
+install(DIRECTORY ${casadi_DESTDIR}/lib/cmake/casadi/ 
+  DESTINATION share/${PROJECT_NAME}/cmake
+)
+
 install(DIRECTORY ${casadi_DESTDIR}/include/
   DESTINATION include
 )

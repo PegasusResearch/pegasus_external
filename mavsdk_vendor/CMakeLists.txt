@@ -44,6 +44,11 @@ endforeach()
 ament_export_include_directories(include)
 ament_export_libraries(${SHORT_LIBS})
 
+# Move the cmake configurations such that mavsdk can be found automatically
+install(DIRECTORY ${mavsdk_DESTDIR}/lib/cmake/MAVSDK/ 
+  DESTINATION share/${PROJECT_NAME}/cmake
+)
+
 install(DIRECTORY ${mavsdk_DESTDIR}/include/
   DESTINATION include
 )
