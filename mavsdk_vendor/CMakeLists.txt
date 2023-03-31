@@ -20,6 +20,9 @@ find_package(ament_cmake REQUIRED)
 
 set(mavsdk_DESTDIR ${CMAKE_CURRENT_BINARY_DIR}/mavsdk_install)
 
+include(ProcessorCount)
+ProcessorCount(N)
+
 include(ExternalProject)
 ExternalProject_Add(mavsdk
   GIT_REPOSITORY https://github.com/mavlink/MAVSDK
@@ -27,7 +30,11 @@ ExternalProject_Add(mavsdk
   GIT_SHALLOW TRUE
   BUILD_IN_SOURCE TRUE
   INSTALL_DIR ${mavsdk_DESTDIR}
-  CONFIGURE_COMMAND ${CMAKE_COMMAND} -DCMAKE_INSTALL_PREFIX=<INSTALL_DIR> -DCMAKE_POSITION_INDEPENDENT_CODE=ON
+  CONFIGURE_COMMAND ${CMAKE_COMMAND} 
+    -DCMAKE_INSTALL_PREFIX=<INSTALL_DIR> 
+    -DCMAKE_POSITION_INDEPENDENT_CODE=ON
+  BUILD_COMMAND        make -j ${N}
+  INSTALL_COMMAND      make install
 )
 
 file(GLOB SHARED_LIBS
