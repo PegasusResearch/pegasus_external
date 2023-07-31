@@ -26,7 +26,7 @@ ProcessorCount(N)
 include(ExternalProject)
 ExternalProject_Add(mavsdk
   GIT_REPOSITORY https://github.com/mavlink/MAVSDK
-  GIT_TAG v1.4.13
+  GIT_TAG fadfe22e7c053945107201e2638be9a7f8b8ee5c
   GIT_SHALLOW TRUE
   BUILD_IN_SOURCE TRUE
   INSTALL_DIR ${mavsdk_DESTDIR}
