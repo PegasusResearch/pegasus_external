@@ -10,6 +10,7 @@
   <url type="repository">https://github.com/mavlink/MAVSDK</url>
   <url type="website">https://mavsdk.mavlink.io/main/en/index.html</url>
 
+  <build_depend>python3.9-dev</build_depend>
   <buildtool_depend>ament_cmake</buildtool_depend>
 
   <export>
