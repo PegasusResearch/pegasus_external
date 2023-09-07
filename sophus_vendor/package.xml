@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>sophus_vendor</name>
+  <version>1.22.10</version>
+  <description>Wrapper around sophus to make it available to the ROS ecosystem.</description>
+  <maintainer email="marcelo.jacinto@tecnico.ulisboa.pt">Marcelo Jacinto</maintainer>
+  <license>BSD 3-Clause</license>
+
+  <url type="bugtracker">https://github.com/strasdat/Sophus/issues</url>
+  <url type="repository">https://github.com/strasdat/Sophus</url>
+  <url type="website">https://github.com/strasdat/Sophus/tree/1.22.10</url>
+
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>
