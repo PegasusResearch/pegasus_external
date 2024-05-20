@@ -52,8 +52,8 @@ install(DIRECTORY ${micro_xrce_DESTDIR}/lib/
   DESTINATION lib
 )
 
-install(DIRECTORY ${micro_xrce_DESTDIR}/bin
-  DESTINATION lib/${PROJECT_NAME}
+install(DIRECTORY ${micro_xrce_DESTDIR}/bin/
+  DESTINATION lib/${PROJECT_NAME}/
 )
 
 ament_package()
