@@ -22,6 +22,10 @@ set(casadi_DESTDIR ${CMAKE_CURRENT_BINARY_DIR}/casadi_install)
 
 include(ExternalProject)
 ExternalProject_Add(casadi
+  LOG_CONFIGURE ON
+  LOG_INSTALL ON
+  LOG_BUILD ON
+  LOG_OUTPUT_ON_FAILURE ON
   GIT_REPOSITORY https://github.com/casadi/casadi
   GIT_TAG 3.5.5
   GIT_SHALLOW TRUE

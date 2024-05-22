@@ -25,33 +25,24 @@ ProcessorCount(N)
 
 include(ExternalProject)
 ExternalProject_Add(micro_xrce
+  LOG_CONFIGURE ON
+  LOG_INSTALL ON
+  LOG_BUILD ON
+  LOG_OUTPUT_ON_FAILURE ON
   GIT_REPOSITORY https://github.com/eProsima/Micro-XRCE-DDS-Agent.git
   GIT_TAG v2.4.3
   GIT_SHALLOW TRUE
   BUILD_IN_SOURCE FALSE
   SOURCE_DIR           ${CMAKE_BINARY_DIR}/micro_xrce-prefix/micro_xrce
   INSTALL_DIR          ${micro_xrce_DESTDIR}
-  CONFIGURE_COMMAND    cmake .. -DCMAKE_INSTALL_PREFIX=<INSTALL_DIR> -DCMAKE_POSITION_INDEPENDENT_CODE=ON
+  CONFIGURE_COMMAND    cmake .. -DCMAKE_INSTALL_PREFIX=<INSTALL_DIR> -DCMAKE_POSITION_INDEPENDENT_CODE=ON -DBUILD_SHARED_LIBS=OFF
   PATCH_COMMAND        mkdir -p build
   BINARY_DIR           ${CMAKE_BINARY_DIR}/micro_xrce-prefix/micro_xrce/build
   BUILD_DIR            ${CMAKE_BINARY_DIR}/micro_xrce-prefix/micro_xrce/build
   BUILD_COMMAND        make -j ${N}
 )
 
-
-# Move the cmake configurations such that mavsdk can be found automatically
-install(DIRECTORY ${micro_xrce_DESTDIR}/lib/cmake/
-  DESTINATION share/${PROJECT_NAME}/cmake
-)
-
-install(DIRECTORY ${micro_xrce_DESTDIR}/include/
-  DESTINATION include
-)
-
-install(DIRECTORY ${micro_xrce_DESTDIR}/lib/
-  DESTINATION lib
-)
-
+# Move the executable to installation directory
 install(DIRECTORY ${micro_xrce_DESTDIR}/bin/
   DESTINATION lib/${PROJECT_NAME}/
 )
