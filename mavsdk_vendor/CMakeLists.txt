@@ -25,6 +25,10 @@ ProcessorCount(N)
 
 include(ExternalProject)
 ExternalProject_Add(mavsdk
+  LOG_CONFIGURE ON
+  LOG_INSTALL ON
+  LOG_BUILD ON
+  LOG_OUTPUT_ON_FAILURE ON
   GIT_REPOSITORY https://github.com/mavlink/MAVSDK
   GIT_TAG v2.0.1
   GIT_SHALLOW TRUE

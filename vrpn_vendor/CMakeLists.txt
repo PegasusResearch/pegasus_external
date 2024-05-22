@@ -22,6 +22,10 @@ set(vrpn_DESTDIR ${CMAKE_CURRENT_BINARY_DIR}/vrpn_install)
 
 include(ExternalProject)
 ExternalProject_Add(vrpn
+    LOG_CONFIGURE ON
+    LOG_INSTALL ON
+    LOG_BUILD ON
+    LOG_OUTPUT_ON_FAILURE ON
     GIT_REPOSITORY https://github.com/vrpn/vrpn
     GIT_TAG v07.35
     GIT_SHALLOW TRUE
