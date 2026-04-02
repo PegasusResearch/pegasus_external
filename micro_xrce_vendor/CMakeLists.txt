@@ -30,7 +30,7 @@ ExternalProject_Add(micro_xrce
   LOG_BUILD ON
   LOG_OUTPUT_ON_FAILURE ON
   GIT_REPOSITORY https://github.com/eProsima/Micro-XRCE-DDS-Agent.git
-  GIT_TAG v2.4.3
+  GIT_TAG v3.0.1
   GIT_SHALLOW TRUE
   BUILD_IN_SOURCE FALSE
   SOURCE_DIR           ${CMAKE_BINARY_DIR}/micro_xrce-prefix/micro_xrce
